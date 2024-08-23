@@ -10,10 +10,11 @@ function App() {
   const [totalPrice, setTotalPrice] = useState(0);
   
   const menuItems = [
-    { name: 'Burger', description: 'A delicious burger with all the fixings', price: "SEK 79.99" },
-    { name: 'Pizza', description: 'Classic pizza with your favourite toppings', price: "SEK 99.99" },
-    { name: 'Fries', description: 'Crispy golden fries served hot and fresh', price: "SEK 59.99" },
+    { name: 'Burger', description: 'A delicious burger with all the fixings', price:  79.99 },
+    { name: 'Pizza', description: 'Classic pizza with your favourite toppings', price:  99.99 },
+    { name: 'Fries', description: 'Crispy golden fries served hot and fresh', price:  59.99 },
   ];
+ 
 
   const addToOrder = (item) => {
     const existingItemIndex = orderItems.findIndex(orderItem => orderItem.name === item.name);
@@ -27,27 +28,25 @@ function App() {
     }
 
     setOrderItems(updatedOrderItems);
-
-    const price = parseFloat(item.price.replace('SEK ', '').replace(',', '.'));
-    setTotalPrice(prevTotalPrice => prevTotalPrice + price);
+    setTotalPrice(updatedOrderItems.reduce((total, orderItem) => total + orderItem.price * orderItem.quantity, 0));
   };
 
   const increaseQuantity = (index) => {
     let updatedOrderItems = [...orderItems];
-    const price = parseFloat(updatedOrderItems[index].price.replace('SEK ', '').replace(',', '.'));
-    updatedOrderItems[index].quantity += 1;
+    const item = updatedOrderItems[index];
+    item.quantity += 1;
     setOrderItems(updatedOrderItems);
-    setTotalPrice(prevTotalPrice => prevTotalPrice + price);
+    setTotalPrice(updatedOrderItems.reduce((total, orderItem) => total + orderItem.price * orderItem.quantity, 0));
   };
 
   const decreaseQuantity = (index) => {
     let updatedOrderItems = [...orderItems];
-    const price = parseFloat(updatedOrderItems[index].price.replace('SEK ', '').replace(',', '.'));
+    const item = updatedOrderItems[index];
 
-    if (updatedOrderItems[index].quantity > 1) {
-      updatedOrderItems[index].quantity -= 1;
+    if (item.quantity > 0) {
+      item.quantity -= 1;
       setOrderItems(updatedOrderItems);
-      setTotalPrice(prevTotalPrice => prevTotalPrice - price);
+      setTotalPrice(updatedOrderItems.reduce((total, orderItem) => total + orderItem.price * orderItem.quantity, 0));
     }
   };
 
