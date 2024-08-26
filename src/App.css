@@ -78,6 +78,14 @@ h3{
   margin-left: 30px;
   color: black;
 }
+.light-theme{
+  background-color: #ccc;
+  color:#333;
+}
+.dark-theme{
+  background-color: #333;
+  color: #ccc;
+}
 
 
 

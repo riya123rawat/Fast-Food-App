@@ -5,17 +5,14 @@ function OrderSummary({ orderItems, totalPrice, onIncreaseQuantity, onDecreaseQu
     <div className="order-summary">
       <h2>Your Order</h2>
       <table border="1">
-        <thead>
-          <tr>
+        <tr>
             <th>Item</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
             <th>Actions</th>
           </tr>
-        </thead>
-        <tbody>
-          {orderItems.map((item, index) => (
+           {orderItems.map((item, index) => (
             <tr key={index}>
               <td>{item.name}</td>
               <td>SEK {item.price.toFixed(1)}</td>
@@ -24,11 +21,10 @@ function OrderSummary({ orderItems, totalPrice, onIncreaseQuantity, onDecreaseQu
               <td>
               <button onClick={() => onDecreaseQuantity(index)}style={{ backgroundColor: 'red', color: 'white' }}>- </button>
                 <button onClick={() => onIncreaseQuantity(index)} style={{ backgroundColor: 'green', color: 'white' }}>+ </button>
-                
-              </td>
+                 </td>
             </tr>
           ))}
-        </tbody>
+    
       </table>
       <h3>Total Price: SEK {totalPrice.toFixed(1)}</h3>
     </div>
